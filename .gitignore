@@ -4,3 +4,8 @@ out/
 *.wav
 __pycache__/
 styles/*/fonts/*.ttf
+_cache/
+mv-styles/*/public/*.ttf
+mv-styles/*/public/*.mp3
+mv-styles/*/assets/*.wav
+.remotion/
