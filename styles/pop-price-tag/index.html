@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>锚定效应</title>
+<style>
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #4a3b31; }
+  canvas { position: absolute; left: 0; top: 0; }
+</style>
+</head>
+<body>
+<!-- 沸腾线：四张不同种子的置换图，每秒换 8 次 -->
+<svg width="0" height="0" style="position:absolute">
+  <filter id="boil0" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil1" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="2" seed="11"/><feDisplacementMap in="SourceGraphic" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil2" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="2" seed="27"/><feDisplacementMap in="SourceGraphic" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil3" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="2" seed="41"/><feDisplacementMap in="SourceGraphic" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter>
+</svg>
+<canvas id="cv" width="1920" height="1080"></canvas>
+<script src="engine.js"></script>
+<script>
+// 默认加载整片；?sample=1..3 风格样帧；?cover=1&w=..&h=.. 封面
+(function () {
+  const P = new URLSearchParams(location.search);
+  const list = P.get('sample') ? ['chars', 'props', 'sample'] : P.get('cover') ? ['chars', 'props', 'cover'] : ['chars', 'props', 'film'];
+  let i = 0;
+  (function next() {
+    if (i >= list.length) { boot(); return; }
+    const s = document.createElement('script'); s.src = 'scenes/' + list[i++] + '.js'; s.onload = next; document.head.appendChild(s);
+  })();
+})();
+</script>
+</body>
+</html>

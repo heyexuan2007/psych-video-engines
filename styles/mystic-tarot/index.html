@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>巴纳姆效应</title>
+<style>
+  @font-face { font-family: 'Noto Sans SC'; src: url(fonts/NotoSansSC-VF.ttf) format('truetype'); font-weight: 100 900; font-display: block; }
+  @font-face { font-family: 'Noto Serif SC'; src: url(fonts/NotoSerifSC-VF.ttf) format('truetype'); font-weight: 200 900; font-display: block; }
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #120c10; }
+  canvas { position: absolute; left: 0; top: 0; }
+</style>
+</head>
+<body>
+<canvas id="cv" width="1920" height="1080"></canvas>
+<script src="engine.js"></script>
+<script>
+// 画风样帧：?sample=A1..A3（老马戏海报）/ B1..B3（占卜桌烛光）
+(function () {
+  const P = new URLSearchParams(location.search);
+  const list = ['props', 'poster', 'candle', 'mystic'].concat(P.get('sample') ? ['sample'] : P.get('cover') ? ['cover'] : ['film']);
+  let i = 0;
+  (function next() {
+    if (i >= list.length) { boot(); return; }
+    const s = document.createElement('script'); s.src = 'scenes/' + list[i++] + '.js'; s.onload = next; document.head.appendChild(s);
+  })();
+})();
+</script>
+</body>
+</html>

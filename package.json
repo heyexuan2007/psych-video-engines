@@ -1,0 +1,15 @@
+{
+  "name": "psych-video-engines",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "用代码生成心理学科普短视频的五套画风引擎",
+  "engines": { "node": ">=20" },
+  "license": "MIT",
+  "scripts": {
+    "setup": "npx playwright-core install chromium-headless-shell"
+  },
+  "dependencies": {
+    "playwright-core": "1.63.0"
+  }
+}
